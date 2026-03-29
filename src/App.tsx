@@ -1,7 +1,8 @@
 /**
- * === DUNO PREMIUM POPULAR - WORLD CLASS TEMPLATE 2026 ===
- * Estilo: Premium Moderno (High-End Visuals for Popular Pricing)
- * Desenvolvido por: Antigravity (Google Deepmind)
+ * TEMPLATE WHITE-LABEL – SALÃO DE BELEZA DUNO (VERSÃO 10/10)
+ * Design premium moderno e acolhedor para público popular
+ * Corrigido: conteúdo de odontologia removido, design alegre e profissional
+ * Personalização rápida – 15 a 25 minutos
  */
 
 import { useState, useEffect, useRef } from 'react';
@@ -30,36 +31,42 @@ import {
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 
 // === CONFIGURAÇÕES GLOBAIS ===
-const SALON_CONFIG = {
+const SALON_DATA = {
   name: "DUNO",
-  slogan: "Beleza acessível com qualidade premium.",
+  slogan: "Transforme seu visual com qualidade que cabe no seu bolso.",
+  heroText: "Seu Estilo, Nossa Paixão.",
   whatsapp: "5511992876219",
-  whatsappMsg: "Olá! Desejo reservar um momento premium no DUNO.",
-  address: "Alameda das Estrelas, 100 - Bela Vista, SP",
-  hours: "Segunda a Sábado: 09h às 21h",
-  instagram: "@duno_premium",
-  phone: "(11) 99287-6219",
+  whatsappMsg: "Olá! Gostaria de agendar um horário no DUNO.",
+  address: "Alameda das Flores, 450 - Centro, São Paulo SP",
+  hours: "Segunda a Sábado: 08:30 às 20:30",
+  instagram: "@duno_salao",
+  facebook: "dunosalao",
+  stats: [
+    { label: "Clientes Felizes", value: "+3000" },
+    { label: "Anos de Tradição", value: "05+" },
+    { label: "Avaliações 5 Estrelas", value: "+1500" }
+  ]
 };
 
 // --- Componentes Reutilizáveis ---
 
 const SectionTitle = ({ title, subtitle, centered = true }: { title: string, subtitle?: string, centered?: boolean }) => (
-  <div className={`mb-20 ${centered ? 'text-center' : ''}`}>
+  <div className={`mb-16 ${centered ? 'text-center' : ''}`}>
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className={`flex items-center gap-4 mb-6 ${centered ? 'justify-center' : ''}`}
+      className={`flex items-center gap-3 mb-4 ${centered ? 'justify-center' : ''}`}
     >
-      <div className="h-[1px] w-12 bg-primary"></div>
-      <span className="text-primary font-bold uppercase tracking-[0.4em] text-[10px]">{SALON_CONFIG.name}</span>
-      <div className="h-[1px] w-12 bg-primary"></div>
+      <div className="h-[2px] w-8 bg-primary"></div>
+      <span className="text-primary font-bold uppercase tracking-[0.3em] text-[10px]">DUNO EXPERIENCE</span>
+      <div className="h-[2px] w-8 bg-primary"></div>
     </motion.div>
     <motion.h2 
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="text-5xl md:text-7xl font-display text-text-main leading-[1.1] mb-8"
+      className="text-4xl md:text-6xl font-display text-text-main leading-tight mb-6"
     >
       {title}
     </motion.h2>
@@ -71,46 +78,47 @@ const SectionTitle = ({ title, subtitle, centered = true }: { title: string, sub
   </div>
 );
 
-const PremiumButton = ({ text, href, type = "primary", className = "" }: { text: string, href: string, type?: "primary" | "outline", className?: string }) => (
+const WhatsAppCTA = ({ text = "Agendar via WhatsApp", className = "", icon = true }: { text?: string, className?: string, icon?: boolean }) => (
   <motion.a 
-    href={href}
-    target={href.startsWith('http') ? '_blank' : '_self'}
+    href={`https://wa.me/${SALON_DATA.whatsapp}?text=${encodeURIComponent(SALON_DATA.whatsappMsg)}`}
+    target="_blank"
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
-    className={`premium-btn ${type === "primary" ? "btn-primary-luxe" : "btn-outline-luxe"} ${className}`}
+    className={`btn-whatsapp-luxe ${className}`}
   >
+    {icon && <MessageCircle size={22} />}
     {text}
   </motion.a>
 );
 
 // --- Componentes das Seções ---
 
-const SplashScreen = () => {
+const LoadingScreen = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress(p => (p >= 100 ? 100 : p + 4));
-    }, 50);
+      setProgress(p => (p >= 100 ? 100 : p + 5));
+    }, 40);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <motion.div 
-      key="splash"
-      exit={{ opacity: 0, height: 0 }}
+      key="loading"
+      exit={{ opacity: 0, y: -50 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
       className="fixed inset-0 z-[1000] bg-white flex flex-col items-center justify-center overflow-hidden"
     >
       <motion.div 
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="text-primary text-[10vw] font-display font-bold tracking-tighter mb-12"
+        className="text-primary text-6xl font-display font-bold tracking-tighter mb-10"
       >
-        {SALON_CONFIG.name}
+        {SALON_DATA.name}
       </motion.div>
       
-      <div className="w-48 md:w-80 h-[2px] bg-gray-100 relative overflow-hidden">
+      <div className="w-64 h-1.5 bg-gray-100 relative overflow-hidden rounded-full">
         <motion.div 
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
@@ -121,10 +129,10 @@ const SplashScreen = () => {
       <motion.p 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="mt-8 text-text-muted text-[10px] uppercase font-bold tracking-[0.5em]"
+        transition={{ delay: 0.3 }}
+        className="mt-6 text-text-muted text-[10px] uppercase font-bold tracking-[0.4em]"
       >
-        Sinfonia da Beleza
+        Dando o toque final no seu estilo...
       </motion.p>
     </motion.div>
   );
@@ -135,326 +143,290 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => setIsScrolled(window.scrollY > 30);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const links = [
+  const menu = [
     { name: 'Início', href: '#home' },
     { name: 'Sobre', href: '#sobre' },
     { name: 'Serviços', href: '#servicos' },
-    { name: 'Equipe', href: '#equipe' },
+    { name: 'Transformações', href: '#transformacoes' },
     { name: 'Depoimentos', href: '#depoimentos' },
     { name: 'FAQ', href: '#faq' },
   ];
 
   return (
-    <header 
-      className={`fixed w-full z-[500] transition-all duration-700 ${isScrolled ? 'bg-white/80 backdrop-blur-xl py-4 shadow-xl shadow-black/5' : 'bg-transparent py-8'}`}
-    >
+    <nav className={`fixed w-full z-[500] transition-all duration-300 ${isScrolled ? 'glass-nav py-3' : 'bg-transparent py-8'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#home" className="text-3xl font-display font-bold text-primary tracking-tighter hover:opacity-80 transition-opacity">
-          {SALON_CONFIG.name}
+          {SALON_DATA.name}
         </a>
 
-        {/* Desktop Nav */}
-        <div className="hidden xl:flex items-center gap-10">
-          <nav className="flex items-center gap-8">
-            {links.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
-                className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-main hover:text-primary transition-all relative group"
-              >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all group-hover:w-full"></span>
-              </a>
-            ))}
-          </nav>
-          <div className="h-8 w-[1px] bg-gray-200"></div>
-          <PremiumButton 
-            text="Agendar via WhatsApp" 
-            href={`https://wa.me/${SALON_CONFIG.whatsapp}`} 
-            className="!px-6 !py-3 !text-[9px]" 
-          />
+        {/* Desktop Menu */}
+        <div className="hidden lg:flex items-center gap-10">
+          {menu.map(item => (
+            <a key={item.name} href={item.href} className="text-[11px] font-bold uppercase tracking-widest text-text-main hover:text-primary transition-all relative group">
+              {item.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
+            </a>
+          ))}
+          <WhatsAppCTA text="AGENDAR AGORA" className="!py-2.5 !px-6 !text-[10px] !tracking-widest" />
         </div>
 
-        {/* Hamburger */}
-        <button className="xl:hidden text-text-main group" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <div className="space-y-2">
-            <span className={`block w-8 h-[2px] bg-primary transform transition duration-500 ${isMenuOpen ? 'rotate-45 translate-y-2.5' : ''}`}></span>
-            <span className={`block w-6 h-[2px] bg-primary transition duration-500 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`block w-8 h-[2px] bg-primary transform transition duration-500 ${isMenuOpen ? '-rotate-45 -translate-y-2.5' : ''}`}></span>
-          </div>
+        {/* Mobile Toggle */}
+        <button className="lg:hidden text-primary" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <X size={32} /> : <Menu size={32} />}
         </button>
       </div>
 
-      {/* Mobile Nav Overlay */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 bg-white z-[600] flex flex-col items-center justify-center gap-10 overflow-hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-white border-t border-gray-100 overflow-hidden"
           >
-            <button className="absolute top-10 right-10 text-primary" onClick={() => setIsMenuOpen(false)}>
-              <X size={40} />
-            </button>
-            <div className="flex flex-col items-center gap-8">
-              {links.map((link) => (
-                <a 
-                  key={link.name} 
-                  href={link.href} 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-4xl font-display text-text-main hover:text-primary transition-all italic"
-                >
-                  {link.name}
+            <div className="flex flex-col p-8 gap-6">
+              {menu.map(item => (
+                <a key={item.name} href={item.href} onClick={() => setIsMenuOpen(false)} className="text-2xl font-display font-semibold text-text-main">
+                  {item.name}
                 </a>
               ))}
+              <WhatsAppCTA className="mt-4" />
             </div>
-            <PremiumButton 
-              text="Agendar via WhatsApp" 
-              href={`https://wa.me/${SALON_CONFIG.whatsapp}`} 
-              className="mt-10" 
-            />
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </nav>
   );
 };
 
 const Hero = () => {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 200]);
-
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-bg-soft">
-      {/* Background Cinematográfico */}
-      <motion.div style={{ y }} className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1522338140262-f46f5913618a?auto=format&fit=crop&q=80&w=2000" 
-          alt="Premium Studio" 
-          className="w-full h-full object-cover scale-110"
-          referrerPolicy="no-referrer"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary/80 via-secondary/40 to-transparent"></div>
-      </motion.div>
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-white pt-20">
+      {/* Visual Impact Center */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 translate-x-1/4 z-0"></div>
       
-      <div className="max-w-7xl mx-auto px-6 w-full relative z-10 text-white">
+      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10 w-full">
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="max-w-3xl"
+           initial={{ opacity: 0, x: -50 }}
+           animate={{ opacity: 1, x: 0 }}
+           transition={{ duration: 1 }}
         >
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="flex items-center gap-4 mb-8"
+            className="flex items-center gap-3 mb-8"
           >
-            <span className="h-[1px] w-12 bg-primary"></span>
-            <span className="text-primary font-bold uppercase tracking-[0.5em] text-xs">A Arte do Visagismo</span>
+            <span className="text-primary bg-primary/10 p-2 rounded-lg"><Scissors size={20} /></span>
+            <span className="text-primary font-bold uppercase tracking-[0.4em] text-xs">Beleza de Alto Padrão</span>
           </motion.div>
           
-          <h1 className="text-6xl md:text-9xl font-display leading-[0.9] mb-12 tracking-tight">
-            Beleza acessível, <br />
-            qualidade <span className="italic font-normal text-primary">Premium.</span>
+          <h1 className="text-6xl md:text-8xl font-display text-text-main leading-tight mb-10 tracking-tighter">
+            {SALON_DATA.slogan}
           </h1>
           
-          <p className="text-xl md:text-2xl font-light leading-relaxed max-w-xl mb-12 text-white/80 font-sans">
-            No {SALON_CONFIG.name}, elevamos sua experiência com serviços de alta performance em um ambiente sofisticado para todos. 
+          <p className="text-xl text-text-muted font-light leading-relaxed max-w-lg mb-12">
+            No <span className="font-bold text-primary">{SALON_DATA.name}</span>, combinamos técnicas modernas e atendimento acolhedor para que você revele sua melhor versão hoje mesmo.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-8 items-start sm:items-center">
-            <PremiumButton 
-              text="Agendar via WhatsApp" 
-              href={`https://wa.me/${SALON_CONFIG.whatsapp}`} 
-              className="bg-primary border-primary text-white hover:bg-white hover:text-primary !py-6 !px-12"
-            />
-            <a href="#servicos" className="text-[10px] font-bold uppercase tracking-[0.4em] flex items-center gap-4 group hover:text-primary transition-all">
-              Ver Serviços <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-            </a>
+          <div className="flex flex-col sm:flex-row gap-6">
+            <WhatsAppCTA className="!text-lg !py-6 !px-10" />
+            <motion.a 
+              href="#servicos"
+              whileHover={{ scale: 1.05 }}
+              className="btn-outline-duno shadow-sm !text-lg !py-6 !px-10 flex items-center justify-center gap-4"
+            >
+              Ver Nossos Serviços <ArrowRight size={20} />
+            </motion.a>
+          </div>
+        </motion.div>
+        
+        <motion.div 
+          initial={{ opacity: 0, rotate: 2 }}
+          animate={{ opacity: 1, rotate: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="relative"
+        >
+          {/* <!-- TROQUE A IMAGEM AQUI - Hero Hero Principal de Salão --> */}
+          <div className="aspect-square bg-gradient-to-br from-primary to-accent rounded-[60px] p-3 shadow-2xl relative group overflow-hidden">
+            <div className="w-full h-full rounded-[50px] bg-white overflow-hidden relative">
+              <img 
+                src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&q=80&w=2000" 
+                alt="Transformação Capilar DUNO" 
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            {/* Real Price Badge */}
+            <motion.div 
+              animate={{ rotate: [0, 5, -5, 0] }}
+              transition={{ duration: 5, repeat: Infinity }}
+              className="absolute -top-6 -right-6 bg-secondary text-white p-8 rounded-full border-8 border-white shadow-2xl z-20"
+            >
+              <p className="text-[10px] uppercase font-bold tracking-widest text-primary mb-1">Cortes desde</p>
+              <p className="text-3xl font-display font-bold">R$ 35</p>
+            </motion.div>
+          </div>
+          
+          {/* Acolhimento Badge */}
+          <div className="absolute -bottom-10 -left-10 bg-white p-6 rounded-3xl shadow-xl flex items-center gap-4 border border-gray-100 hidden md:flex">
+             <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center">
+                <Smile size={32} />
+             </div>
+             <div>
+                <p className="font-bold text-text-main leading-tight">100% Acolhedor</p>
+                <p className="text-xs text-text-muted">Aqui você é de casa!</p>
+             </div>
           </div>
         </motion.div>
       </div>
-
-      {/* Floating Elements */}
-      <div className="absolute bottom-12 right-12 z-10 hidden xl:flex gap-16 pointer-events-none">
-        <div className="flex flex-col items-end">
-          <span className="text-5xl font-display text-white">15+</span>
-          <span className="text-[9px] uppercase tracking-widest text-primary font-bold">Anos de Experiência</span>
-        </div>
-        <div className="flex flex-col items-end">
-          <span className="text-5xl font-display text-white">100%</span>
-          <span className="text-[9px] uppercase tracking-widest text-primary font-bold">Produtos Premium</span>
-        </div>
-      </div>
-
-      <motion.div 
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/30 flex flex-col items-center gap-2"
-      >
-        <span className="text-[8px] uppercase tracking-[0.4em] font-bold">Scroll</span>
-        <div className="w-[1px] h-10 bg-white/30"></div>
-      </motion.div>
     </section>
   );
 };
 
 const AboutSection = () => (
-  <section id="sobre" className="py-40 bg-white overflow-hidden">
-    <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-24 items-center">
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        className="relative"
-      >
-        <div className="aspect-[4/5] bg-bg-soft rounded-tl-[100px] rounded-br-[100px] overflow-hidden shadow-2xl">
-          <img 
-            src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&q=80&w=1200" 
-            alt="Nosso Estúdio" 
-            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-            referrerPolicy="no-referrer"
-          />
-        </div>
-        <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-primary p-8 hidden xl:flex flex-col justify-center items-center text-white text-center">
-          <Scissors size={40} className="mb-4" />
-          <p className="font-display italic text-2xl leading-none font-normal lowercase tracking-tight">Cortes <br /> memoráveis</p>
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-      >
-        <SectionTitle title="A Essência do Cuidado" centered={false} />
-        <div className="space-y-10 text-text-muted text-lg leading-[1.8] font-light text-justify-custom font-sans">
-          <p>
-            O {SALON_CONFIG.name} transcende o conceito tradicional de salão. Nascemos da convicção de que a beleza de alto padrão não precisa ser proibitiva. Unimos a sofisticação das grandes grifes internacionais a preços acolhedores e transparentes. 
-          </p>
-          <p>
-            Cada traço, cada corte e cada tom é meticulosamente planejado por nossa equipe de visagistas para refletir sua verdade interna. No DUNO, você é o protagonista de uma experiência premium, do momento em que entra ao momento em que revela seu novo eu ao mundo.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-2 gap-12 mt-16 pt-16 border-t border-gray-100">
-          <div>
-            <span className="text-4xl font-display text-text-main mb-2 block">30k+</span>
-            <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-primary">Clientes Felizes</span>
-          </div>
-          <div>
-            <span className="text-4xl font-display text-text-main mb-2 block">08+</span>
-            <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-primary">Mestres Estilistas</span>
-          </div>
-        </div>
-
-        <PremiumButton 
-          text="Saiba mais no Instagram" 
-          href={`https://instagram.com/${SALON_CONFIG.instagram}`} 
-          type="outline"
-          className="mt-20"
-        />
-      </motion.div>
-    </div>
-  </section>
+   <section id="sobre" className="py-32 bg-bg-soft relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
+         <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="aspect-video rounded-[60px] overflow-hidden shadow-2xl relative"
+         >
+            {/* <!-- TROQUE A IMAGEM AQUI - Foto das Instalações do Salão --> */}
+            <img 
+               src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&q=80&w=1200" 
+               alt="Ambiente Relaxante DUNO" 
+               className="w-full h-full object-cover"
+               referrerPolicy="no-referrer"
+            />
+         </motion.div>
+         
+         <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+         >
+            <SectionTitle 
+               title="Beleza para Todos" 
+               subtitle="Nossa missão é democratizar a alta qualidade em estética, oferecendo um espaço inclusivo, moderno e alegre para todas as pessoas."
+               centered={false}
+            />
+            
+            <div className="grid grid-cols-3 gap-8 mb-12">
+               {SALON_DATA.stats.map((stat, i) => (
+                  <div key={i} className="text-center md:text-left">
+                     <p className="text-4xl font-display font-bold text-primary mb-2 tracking-tighter">{stat.value}</p>
+                     <p className="text-[10px] text-text-muted font-bold uppercase tracking-widest">{stat.label}</p>
+                  </div>
+               ))}
+            </div>
+            
+            <p className="text-text-muted text-lg font-light leading-relaxed mb-10">
+               No {SALON_DATA.name}, acreditamos que cuidar de si não precisa ser um luxo inacessível. Nossa equipe é composta por talentos dedicados a ouvir você e entender seu estilo único.
+            </p>
+            
+            <WhatsAppCTA text="Conhecer o Salão" icon={false} className="!bg-secondary" />
+         </motion.div>
+      </div>
+   </section>
 );
 
 const ServicesSection = () => {
   const [activeTab, setActiveTab] = useState<'masc' | 'fem' | 'unisex'>('fem');
 
-  const categories = {
+  const pricing = {
     masc: [
-      { name: "Corte Masculino", price: "35", desc: "Design especializado com acabamento em navalha.", img: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=800" },
-      { name: "Corte + Barba", price: "55", desc: "O ritual completo de alinhamento e estilo.", img: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800" },
-      { name: "Modelagem de Barba", price: "28", desc: "Definição de traços e hidratação profunda.", img: "https://images.unsplash.com/photo-1599351431247-f10b21ce963f?w=800" },
-      { name: "Coloração Barba", price: "45", desc: "Cobertura natural para realçar a densidade.", img: "https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?w=800" }
+      { name: "Corte Masculino", price: "35,00", desc: "Corte clássico, degradê ou social.", img: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600" },
+      { name: "Corte + Barba", price: "55,00", desc: "Ritual completo para um visual alinhado.", img: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600" },
+      { name: "Modelagem de Barba", price: "28,00", desc: "Desenho da barba com toalha quente.", img: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600" },
+      { name: "Coloração de Barba", price: "45,00", desc: "Correção de tons para um visual natural.", img: "https://images.unsplash.com/photo-1599351431247-f10b21ce963f?w=600" }
     ],
     fem: [
-      { name: "Corte Feminino", price: "45", desc: "Consultoria de visagismo para seu melhor ângulo.", img: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=800" },
-      { name: "Coloração Completa", price: "85", desc: "Pigmentação de alta fidelidade com proteção térmica.", img: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800" },
-      { name: "Mechas/Luzes", price: "120", desc: "Iluminação artística com técnica de mãos livre.", img: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=800" },
-      { name: "Escova Premium", price: "35", desc: "Lavagem sensorial e finalização de escova lisa ou ondas.", img: "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=800" }
+      { name: "Corte Feminino", price: "45,00", desc: "Visagismo completo para seu rosto.", img: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600" },
+      { name: "Coloração Completa", price: "85,00", desc: "Cobertura total dos fios com brilho.", img: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600" },
+      { name: "Mechas / Luzes", price: "120,00", desc: "Iluminação técnica de alto nível.", img: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=600" },
+      { name: "Escova Premium", price: "35,00", desc: "Lavagem sensorial e escovação.", img: "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600" }
     ],
     unisex: [
-      { name: "Hidratação Profunda", price: "45", desc: "Infusão de nutrientes e brilho tridimensional.", img: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=800" },
-      { name: "Manicure & Pedicure", price: "50", desc: "Cuidado completo com esmaltação francesa e hidratação.", img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800" },
-      { name: "Design Sobrancelhas", price: "20", desc: "Arquitetura do olhar com técnica de pinça e linha.", img: "https://images.unsplash.com/photo-1522337443140-52f20c810756?w=800" },
-      { name: "Selagem Redutora", price: "110", desc: "Controle de frizz e alinhamento elegante dos fios.", img: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=800" }
+      { name: "Hidratação Profunda", price: "45,00", desc: "Reposição de nutrientes e massa.", img: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600" },
+      { name: "Combo Manicure + Pedicure", price: "50,00", desc: "Cuidado completo para mãos e pés.", img: "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600" },
+      { name: "Selagem Capilar", price: "110,00", desc: "Redução de frizz e alinhamento elegante.", img: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?w=600" },
+      { name: "Design de Sobrancelhas", price: "20,00", desc: "Arquitetura do olhar com técnica.", img: "https://images.unsplash.com/photo-1522337443140-52f20c810756?w=600" },
+      { name: "Massagem Capilar", price: "40,00", desc: "Relaxante e estimulante para os fios.", img: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600" },
+      { name: "Depilação com Cera", price: "25,00", desc: "Técnica suave com produtos premium.", img: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600" }
     ]
   };
 
   return (
-    <section id="servicos" className="py-40 bg-bg-soft">
+    <section id="servicos" className="py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <SectionTitle 
           title="Nossos Serviços" 
-          subtitle="Escolha sua categoria e descubra uma gama completa de cuidados desenhados para sua melhor versão."
+          subtitle="Tabela de preços justa e transparente. Selecione a categoria abaixo e agende seu horário agora!"
         />
 
-        {/* Tab Selector Luxe */}
-        <div className="flex border-b border-gray-200 mb-20 overflow-x-auto scrollbar-hide">
+        {/* Tab Selection */}
+        <div className="flex bg-bg-soft p-1.5 rounded-3xl mb-16 max-w-xl mx-auto border border-gray-100 shadow-inner">
           {([
-            { id: 'masc', label: 'MASCULINO' },
-            { id: 'fem', label: 'FEMININO' },
-            { id: 'unisex', label: 'ESPECIALIDADES UNISEX' }
+            { id: 'masc', label: 'MASCULINOS', icon: <User size={18} /> },
+            { id: 'fem', label: 'FEMININOS', icon: <Users size={18} /> },
+            { id: 'unisex', label: 'UNISEX / GERAL', icon: <Smile size={18} /> }
           ] as const).map((tab) => (
             <button 
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`pb-8 px-10 text-[10px] font-bold uppercase tracking-[0.4em] transition-all whitespace-nowrap relative ${activeTab === tab.id ? 'text-primary' : 'text-gray-400 hover:text-text-main'}`}
+              className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-2xl text-[10px] font-bold transition-all tracking-widest ${activeTab === tab.id ? 'bg-primary text-white shadow-lg' : 'text-text-muted hover:text-primary'}`}
             >
+              {tab.icon}
               {tab.label}
-              {activeTab === tab.id && (
-                <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 w-full h-[2px] bg-primary" />
-              )}
             </button>
           ))}
         </div>
 
-        {/* Grid animada de Serviços */}
+        {/* Services Cards */}
         <AnimatePresence mode="wait">
           <motion.div 
             key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.6 }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-10"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.5 }}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {categories[activeTab].map((s, i) => (
+            {pricing[activeTab].map((item, i) => (
               <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="card-luxe group"
+               key={i}
+               initial={{ opacity: 0, y: 30 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ delay: i * 0.1 }}
+               className="card-service-premium group"
               >
-                <div className="aspect-[4/5] overflow-hidden relative">
-                  <img src={s.img} alt={s.name} className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-8 text-center pointer-events-none">
-                    <p className="text-white text-xs font-light italic leading-relaxed">{s.desc}</p>
+                <div className="aspect-video relative overflow-hidden">
+                  <img src={item.img} alt={item.name} className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-110" />
+                  <div className="absolute top-4 left-4 bg-primary text-white text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full shadow-lg">
+                    POPULAR + QUALIDADE
                   </div>
                 </div>
                 <div className="p-8">
-                  <h4 className="text-2xl font-display text-text-main mb-2 truncate">{s.name}</h4>
-                  <div className="flex justify-between items-end">
-                    <div className="flex flex-col">
-                      <span className="text-[9px] uppercase font-bold text-gray-400 tracking-[0.2em]">A partir de</span>
-                      <span className="text-2xl font-display text-primary">R$ {s.price}</span>
+                  <h4 className="text-2xl font-display text-text-main mb-3 group-hover:text-primary transition-colors">{item.name}</h4>
+                  <p className="text-sm text-text-muted mb-6 leading-relaxed italic">{item.desc}</p>
+                  <div className="flex justify-between items-end pt-6 border-t border-gray-100">
+                    <div>
+                      <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">A partir de</p>
+                      <p className="text-3xl font-display text-text-main font-bold tracking-tighter">R$ {item.price}</p>
                     </div>
                     <a 
-                      href={`https://wa.me/${SALON_CONFIG.whatsapp}?text=${encodeURIComponent(`Gostaria de agendar: ${s.name}`)}`}
-                      className="text-[9px] font-bold uppercase tracking-widest text-text-main hover:text-primary transition-colors flex items-center gap-2"
+                      href={`https://wa.me/${SALON_DATA.whatsapp}?text=${encodeURIComponent(`Quero agendar: ${item.name}`)}`}
+                      className="text-primary hover:text-secondary flex items-center gap-2 font-bold text-xs uppercase tracking-widest"
                     >
-                      Reservar <Plus size={12} />
+                      AGENDAR <ArrowRight size={16} />
                     </a>
                   </div>
                 </div>
@@ -467,210 +439,171 @@ const ServicesSection = () => {
   );
 };
 
-const PortfolioSection = () => (
-  <section className="py-40 bg-white">
-    <div className="max-w-7xl mx-auto px-6">
-      <SectionTitle 
-        title="O Novo Visual" 
-        subtitle="Confira algumas das nossas transformações favoritas."
-      />
-      <div className="grid md:grid-cols-3 gap-8">
-        {[
-          "https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?w=1000",
-          "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=1000",
-          "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?w=1000"
-        ].map((img, i) => (
-          <motion.div 
-            key={i}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.2 }}
-            className="aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000"
-          >
-            <img src={img} alt="Portfolio" className="w-full h-full object-cover" />
-          </motion.div>
-        ))}
+const TransformationSection = () => (
+   <section id="transformacoes" className="py-32 bg-bg-soft">
+      <div className="max-w-7xl mx-auto px-6">
+         <SectionTitle 
+            title="Sua Melhor Versão" 
+            subtitle="Confira algumas das transformações impressionantes feitas por nossa equipe com carinho e dedicação."
+         />
+         
+         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[1, 2, 3, 4].map((i) => (
+               <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="aspect-[3/4] rounded-3xl overflow-hidden group relative shadow-xl"
+               >
+                  <img src={`https://images.unsplash.com/photo-${i === 1 ? '1621605815971-fbc98d665033' : i === 2 ? '1595476108010-b4d1f102b1b1' : i === 3 ? '1560066984-138dadb4c035' : '1580618672591-eb180b1a973f'}?w=800`} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Transformação" />
+                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                     <span className="bg-white text-primary p-4 rounded-full shadow-2xl">
+                        <ArrowRight size={32} />
+                     </span>
+                  </div>
+                  <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20">
+                     <p className="text-white text-[10px] font-bold uppercase tracking-widest">Resultado Real</p>
+                  </div>
+               </motion.div>
+            ))}
+         </div>
       </div>
-    </div>
-  </section>
+   </section>
 );
 
-const TestimonialsSection = () => {
-  const [index, setIndex] = useState(0);
-  const reviews = [
-    { name: "Luciana Santos", text: "Uma experiência impecável. Nunca imaginei que poderia ter um atendimento tão sofisticado por um preço acessível.", role: "Advogada" },
-    { name: "Pedro Oliveira", text: "Melhor barbearia do bairro. Atendimento rápido, técnico e de altíssimo nível. Recomendo para todos os meus amigos.", role: "Empresário" },
-    { name: "Mariana Costa", text: "Minhas mechas ficaram maravilhosas. A consultoria de visagismo realmente faz a diferença no resultado final.", role: "Designer" }
-  ];
-
-  return (
-    <section id="depoimentos" className="py-40 bg-bg-soft overflow-hidden">
-      <div className="max-w-5xl mx-auto px-6 text-center">
-        <SectionTitle title="A Voz da Experiência" />
-        <div className="relative overflow-hidden min-h-[300px] flex items-center justify-center">
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.8 }}
-              className="px-10"
-            >
-              <p className="text-3xl md:text-5xl font-display italic text-text-main leading-tight mb-12">
-                "{reviews[index].text}"
-              </p>
-              <div className="flex flex-col items-center">
-                <span className="text-primary font-bold uppercase tracking-[0.4em] text-[10px] mb-2">{reviews[index].name}</span>
-                <span className="text-gray-400 text-[10px] uppercase font-light italic tracking-[0.2em]">{reviews[index].role}</span>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-        <div className="flex justify-center gap-10 mt-20">
-          <button onClick={() => setIndex((index - 1 + reviews.length) % reviews.length)} className="text-gray-300 hover:text-primary transition-all p-4 border border-gray-100 rounded-full hover:border-primary">
-            <ChevronLeft size={32} />
-          </button>
-          <button onClick={() => setIndex((index + 1) % reviews.length)} className="text-gray-300 hover:text-primary transition-all p-4 border border-gray-100 rounded-full hover:border-primary">
-            <ChevronRight size={32} />
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const FAQSection = () => {
-  const [open, setOpen] = useState<number | null>(0);
-  const faqs = [
-    { q: "Quais são as formas de pagamento?", a: "Aceitamos Dinheiro, PIX e todos os cartões de Débito e Crédito sem acréscimo." },
-    { q: "Precisa de agendamento prévio?", a: "Recomendamos agendar via WhatsApp para garantir que nossos mestres visagistas dediquem o tempo necessário para sua transformação." },
-    { q: "Qual a localização exata do estúdio?", a: "Estamos em " + SALON_CONFIG.address + ", com estacionamento cortesia para nossos clientes." }
-  ];
+    const [open, setOpen] = useState<number | null>(0);
+    const faqs = [
+       { q: "Quais as formas de pagamento?", a: "Aceitamos Dinheiro, PIX e cartões de Débito e Crédito (Visa, Master, Elo, etc.)." },
+       { q: "Precisa marcar horário com antecedência?", a: "Para garantir que você não enfrente filas, recomendamos fortemente o agendamento prévio via WhatsApp." },
+       { q: "Atendem barba masculina também?", a: "Sim! Somos especialistas em visagismo masculino, cortes modernos e barboterapia completa." },
+       { q: "Onde o salão está localizado?", a: SALON_DATA.address + ". É fácil de chegar!" }
+    ];
 
-  return (
-    <section id="faq" className="py-40 bg-white">
-      <div className="max-w-4xl mx-auto px-6">
-        <SectionTitle title="Dúvidas Frequentes" />
-        <div className="space-y-6">
-          {faqs.map((f, i) => (
-            <div key={i} className="border-b border-gray-100 pb-8">
-              <button 
-                onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex justify-between items-center text-left hover:opacity-70 transition-opacity"
-              >
-                <span className={`text-2xl font-display text-text-main transition-all ${open === i ? 'italic text-primary' : ''}`}>
-                  {f.q}
-                </span>
-                {open === i ? <Minus size={24} className="text-primary" /> : <Plus size={24} className="text-gray-300" />}
-              </button>
-              <AnimatePresence>
-                {open === i && (
-                  <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden mt-6 text-text-muted text-lg leading-relaxed font-light">
-                    {f.a}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+    return (
+       <section id="faq" className="py-32 bg-white">
+          <div className="max-w-3xl mx-auto px-6">
+             <SectionTitle title="Dúvidas Frequentes" />
+             <div className="space-y-4">
+                {faqs.map((f, i) => (
+                   <div key={i} className="border transition-all duration-300 rounded-3xl overflow-hidden">
+                      <button 
+                        onClick={() => setOpen(open === i ? null : i)}
+                        className={`w-full p-8 text-left flex justify-between items-center transition-colors ${open === i ? 'bg-primary/5 text-primary' : 'hover:bg-gray-50'}`}
+                      >
+                         <span className="text-xl font-display font-bold">{f.q}</span>
+                         {open === i ? <Minus size={22} /> : <Plus size={22} />}
+                      </button>
+                      <AnimatePresence>
+                         {open === i && (
+                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+                               <div className="p-8 pt-0 text-text-muted leading-relaxed italic">
+                                  {f.a}
+                               </div>
+                            </motion.div>
+                         )}
+                      </AnimatePresence>
+                   </div>
+                ))}
+             </div>
+          </div>
+       </section>
+    );
 };
 
 const Footer = () => (
-  <footer className="bg-secondary text-white py-32 overflow-hidden relative">
-    <div className="absolute top-0 right-0 w-1/4 h-full bg-primary/5 -skew-x-12 translate-x-1/2"></div>
-    <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-3 gap-24 relative z-10">
-      <div>
-        <h3 className="text-5xl font-display font-bold text-primary mb-10 tracking-tighter">{SALON_CONFIG.name}</h3>
-        <p className="text-gray-400 font-light leading-relaxed mb-12 text-lg">
-          Transformamos beleza cotidiana em expressão de arte. No DUNO, cada visita é uma celebração da sua individualidade.
-        </p>
-        <div className="flex gap-8">
-          <a href="#" className="text-gray-400 hover:text-primary transition-all"><Instagram size={28} /></a>
-          <a href="#" className="text-gray-400 hover:text-primary transition-all"><Facebook size={28} /></a>
-        </div>
+   <footer className="bg-text-main text-white py-24 px-6 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-1/4 h-full bg-primary/10 -skew-x-12 translate-x-1/2"></div>
+      <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-20 relative z-10">
+         <div>
+            <h3 className="text-4xl font-display font-bold text-primary mb-8 tracking-tighter">{SALON_DATA.name}</h3>
+            <p className="text-gray-400 font-light leading-relaxed mb-10 text-lg">
+               Beleza popular com alma premium há mais de 5 anos no mercado. Nossa alegria é cuidar de você.
+            </p>
+            <div className="flex gap-8">
+               <a href="#" className="text-gray-400 hover:text-primary active:scale-95 transition-all"><Instagram size={28} /></a>
+               <a href="#" className="text-gray-400 hover:text-primary active:scale-95 transition-all"><Facebook size={28} /></a>
+               <a href="#" className="text-gray-400 hover:text-primary active:scale-95 transition-all"><Phone size={28} /></a>
+            </div>
+         </div>
+         
+         <div>
+            <h4 className="text-[10px] uppercase font-bold tracking-[0.4em] text-primary mb-10">Contatos & Locais</h4>
+            <div className="space-y-8 text-gray-300">
+               <div className="flex items-start gap-4">
+                  <MapPin size={24} className="text-primary flex-shrink-0" />
+                  <p className="text-lg font-light leading-relaxed">{SALON_DATA.address}</p>
+               </div>
+               <div className="flex items-start gap-4">
+                  <Clock size={24} className="text-primary flex-shrink-0" />
+                  <p className="text-lg font-light leading-relaxed">{SALON_DATA.hours}</p>
+               </div>
+               <div className="flex items-start gap-4">
+                  <MessageCircle size={24} className="text-primary flex-shrink-0" />
+                  <p className="text-lg font-light leading-relaxed">Agende pelo Zap: <br /><span className="text-primary font-bold">{SALON_DATA.whatsapp}</span></p>
+               </div>
+            </div>
+         </div>
+         
+         <div>
+            <h4 className="text-[10px] uppercase font-bold tracking-[0.4em] text-primary mb-10">Venha Brilhar</h4>
+            <p className="text-gray-400 font-light mb-10 text-lg">Não deixe seu visual para depois. O DUNO cuida de você agora mesmo!</p>
+            <WhatsAppCTA className="!w-full text-center" />
+         </div>
       </div>
-
-      <div>
-        <h4 className="text-[10px] uppercase font-bold tracking-[0.4em] text-primary mb-12">Localização & Contato</h4>
-        <div className="space-y-8 text-gray-300">
-          <div className="flex items-start gap-4">
-            <MapPin size={24} className="text-primary" />
-            <p className="text-lg font-light leading-relaxed">{SALON_CONFIG.address}</p>
-          </div>
-          <div className="flex items-start gap-4">
-            <Phone size={24} className="text-primary" />
-            <p className="text-lg font-light leading-relaxed">{SALON_CONFIG.phone} <br /> <span className="text-xs text-gray-500 uppercase tracking-widest">(WhatsApp)</span></p>
-          </div>
-          <div className="flex items-start gap-4">
-            <Clock size={24} className="text-primary" />
-            <p className="text-lg font-light leading-relaxed">{SALON_CONFIG.hours}</p>
-          </div>
-        </div>
+      
+      <div className="max-w-7xl mx-auto mt-24 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-[9px] uppercase tracking-[0.4em] text-gray-600 font-bold">
+         <p>© {new Date().getFullYear()} {SALON_DATA.name} SALÃO — Seu Estilo, Nossa Paixão.</p>
+         <p className="flex gap-10">
+            <a href="#" className="hover:text-primary">Legal</a>
+            <a href="#" className="hover:text-primary">Privacidade</a>
+         </p>
       </div>
-
-      <div>
-        <h4 className="text-[10px] uppercase font-bold tracking-[0.4em] text-primary mb-12">Experiência DUNO</h4>
-        <p className="text-gray-400 font-light mb-12 text-lg">Pronto para sua melhor versão? Reserve agora sua consultoria exclusiva.</p>
-        <PremiumButton 
-          text="Agendar via WhatsApp" 
-          href={`https://wa.me/${SALON_CONFIG.whatsapp}`} 
-          className="!w-full text-center"
-        />
-      </div>
-    </div>
-    
-    <div className="max-w-7xl mx-auto mt-32 pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] uppercase tracking-[0.4em] text-gray-600 font-bold">
-      <p>© {new Date().getFullYear()} {SALON_CONFIG.name} SALON — Todos os direitos reservados.</p>
-      <p className="flex gap-10">
-        <a href="#" className="hover:text-primary">Legal</a>
-        <a href="#" className="hover:text-primary">Privacidade</a>
-      </p>
-    </div>
-  </footer>
+   </footer>
 );
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2500);
+    const timer = setTimeout(() => setIsLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="selection:bg-primary/20 selection:text-primary min-h-screen">
       <AnimatePresence>
-        {isLoading && <SplashScreen key="splash" />}
+        {isLoading && <LoadingScreen />}
       </AnimatePresence>
       
       {!isLoading && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+        <motion.div 
+           initial={{ opacity: 0 }} 
+           animate={{ opacity: 1 }} 
+           className="relative"
+        >
           <Header />
           <Hero />
           <AboutSection />
           <ServicesSection />
-          <PortfolioSection />
-          <TestimonialsSection />
+          <TransformationSection />
           <FAQSection />
           <Footer />
           
-          {/* Floating WhatsApp Luxo */}
+          {/* Floating WhatsApp Pulsante + Glow */}
           <motion.a 
-            href={`https://wa.me/${SALON_CONFIG.whatsapp}`}
+            href={`https://wa.me/${SALON_DATA.whatsapp}`}
             target="_blank"
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 2, type: "spring" }}
-            className="fixed bottom-10 right-10 z-[1000] bg-primary text-white p-6 shadow-2xl hover:scale-110 active:scale-90 transition-all group"
+            className="fixed bottom-10 right-10 z-[1000] bg-[#25D366] text-white p-6 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.5)] animate-whatsapp group"
           >
             <MessageCircle size={32} />
-            <span className="absolute right-full mr-8 top-1/2 -translate-y-1/2 bg-white text-secondary px-6 py-3 text-[10px] font-bold uppercase tracking-widest shadow-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-all whitespace-nowrap">
-              Agendar agora
+            <span className="absolute right-full mr-10 top-1/2 -translate-y-1/2 bg-white text-secondary px-6 py-3 rounded-2xl text-[10px] font-bold uppercase tracking-widest shadow-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-all scale-90 group-hover:scale-100">
+               Chamar no Zap 🚀
             </span>
           </motion.a>
         </motion.div>

@@ -1,7 +1,13 @@
 /**
- * === DUNO PREMIUM POPULAR - GLOBAL DESIGN SYSTEM ===
- * Estilo: Minimalismo Sofisticado com Paleta Energética (Laranja & Obsidian)
- * Tipografia: Playfair Display (Títulos) + Inter (Corpo)
+ * === PERSONALIZAÇÃO RÁPIDA DO CLIENTE (DUNO 10/10) ===
+ * 
+ * --primary-color:    Cor principal vibrante (Laranja #FF6B00)
+ * --secondary-color:  Cor de contraste (Preto #1A1A1A)
+ * --accent-color:     Cor de detalhe (Amarelo #FFC107)
+ * --bg-color:         Cor de fundo principal (Branco)
+ * --light-bg:         Cor de fundo suave (Cinza #F8F9FA)
+ * --text-dark:        Cor do texto principal (Preto #222222)
+ * --radius-premium:   Arredondamento (8px / 0.5rem)
  */
 
 @import "tailwindcss";
@@ -11,96 +17,60 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Playfair Display", serif;
 
-  /* MAPEAMENTO DE VARIÁVEIS CSS PARA O TAILWIND */
   --color-primary: var(--primary-color);
   --color-secondary: var(--secondary-color);
   --color-accent: var(--accent-color);
   --color-bg-light: var(--bg-color);
-  --color-bg-soft: var(--bg-soft);
-  --color-text-main: var(--text-main);
-  --color-text-muted: var(--text-muted);
+  --color-bg-soft: var(--light-bg);
+  --color-text-main: var(--text-dark);
 }
 
 :root {
-  /* PALETA PREMIUM ACESSÍVEL */
-  --primary-color: #FF6B00;    /* Laranja Energético Premium */
-  --secondary-color: #1A1A1A;  /* Preto Profundo Obsidian */
-  --accent-color: #FFC107;     /* Amarelo Dourado Suave */
-  --bg-color: #FFFFFF;         /* Branco Puro */
-  --bg-soft: #F9F8F6;          /* Off-White Creme */
-  --text-main: #1A1A1A;        /* Preto Obsidian */
-  --text-muted: #666666;       /* Cinza Sofisticado */
-  --radius: 0rem;              /* Design Moderno: Cantos Retos/Afiados ou mínimos */
+  --primary-color: #FF6B00;
+  --secondary-color: #1A1A1A;
+  --accent-color: #FFC107;
+  --bg-color: #FFFFFF;
+  --light-bg: #F8F9FA;
+  --text-dark: #222222;
+  --radius-premium: 0.5rem;
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    @apply font-sans text-text-main bg-bg-light antialiased overflow-x-hidden;
-  }
-  
-  h1, h2, h3, h4, .font-display {
-    @apply font-display font-bold;
-  }
-
-  /* Custom Scrollbar Premium */
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    @apply bg-bg-soft;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply bg-primary hover:bg-primary/80 transition-colors;
-  }
+  html { scroll-behavior: smooth; }
+  body { @apply font-sans text-text-main bg-bg-light antialiased overflow-x-hidden; }
+  h1, h2, h3, h4, .font-display { @apply font-display font-bold lg:tracking-tight; }
 }
 
-/* UI ELEMENTS */
-
-.section-container {
-  @apply max-w-7xl mx-auto px-6 py-32;
+/* CUSTOM UI */
+.btn-whatsapp-luxe {
+  @apply bg-[#25D366] text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-3 transition-all hover:scale-105 active:scale-95 shadow-lg hover:shadow-[#25D366]/30;
 }
 
-.text-justify-custom {
-  text-align: justify;
-  text-justify: inter-word;
+.btn-primary-duno {
+  @apply bg-primary text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest text-xs transition-all hover:bg-secondary hover:shadow-2xl shadow-primary/20;
 }
 
-.premium-btn {
-  @apply relative overflow-hidden px-10 py-5 font-bold text-[10px] tracking-[0.3em] uppercase transition-all duration-500 border;
+.btn-outline-duno {
+  @apply border-2 border-gray-100 text-text-main px-10 py-5 rounded-full font-bold uppercase tracking-widest text-xs transition-all hover:border-primary hover:text-primary;
 }
 
-.btn-primary-luxe {
-  @apply bg-primary border-primary text-white hover:bg-transparent hover:text-primary;
+.card-service-premium {
+  @apply bg-white border border-gray-100 rounded-[var(--radius-premium)] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2;
 }
 
-.btn-outline-luxe {
-  @apply border-secondary text-secondary hover:bg-secondary hover:text-white;
+.glass-nav {
+  @apply bg-white/95 backdrop-blur-md shadow-sm;
 }
 
-.card-luxe {
-  @apply relative overflow-hidden bg-white transition-all duration-700 hover:shadow-2xl border border-transparent hover:border-gray-100;
+/* Animações */
+@keyframes pulse-whatsapp {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
+.animate-whatsapp { animation: pulse-whatsapp 2s infinite; }
 
-/* Animação de Pulso Discreta */
-@keyframes pulse-soft {
-  0% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.8; }
-}
-
-.animate-pulse-soft {
-  animation: pulse-soft 3s infinite ease-in-out;
-}
-
-/* Reveal Animation Utilities */
-.reveal-up {
-  @apply opacity-0 translate-y-10 transition-all duration-1000 ease-out;
-}
-
-.revealed {
-  @apply opacity-100 translate-y-0 text-orange-600;
-}
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { @apply bg-bg-soft; }
+::-webkit-scrollbar-thumb { @apply bg-primary/40 rounded-full hover:bg-primary transition-colors; }
