@@ -6,17 +6,17 @@
   --font-display: "Playfair Display", serif;
   --font-accent: "Space Grotesk", sans-serif;
   
-  /* === PERSONALIZAÇÃO SALÃO DE BELEZA PREMIUM (ROSE GOLD & CHARCOAL) === */
-  --color-primary: #121212;      /* Charcoal Elegante */
-  --color-accent: #B76E79;       /* Rose Gold Sofisticado */
-  --color-accent-light: #F8E8E8; /* Blush Suave */
-  --color-bg-light: #FFFFFF;     /* Branco Puro */
-  --color-bg-soft: #FAF9F6;      /* Off-White Pérola */
-  --color-text-main: #1A1A1A;    /* Preto Matte */
-  --color-text-muted: #6B7280;   /* Cinza Sofisticado */
+  /* === LUXURY GLOBAL DESIGN SYSTEM (OBSIDIAN & VINTAGE GOLD) === */
+  --color-primary: #1A1A1A;      /* Obsidian Black */
+  --color-accent: #C5A059;       /* Vintage Gold */
+  --color-accent-light: #E0D5B8; /* Pale Gold */
+  --color-bg-light: #FDFBF7;     /* Alabaster Silk */
+  --color-bg-soft: #F5F2ED;      /* Warm Stone */
+  --color-text-main: #2D2D2D;    /* Graphite Detail */
+  --color-text-muted: #7A7A7A;   /* Slate Gray */
   --color-whatsapp: #25D366;
   
-  --shadow-premium: 0 20px 50px rgba(183, 110, 121, 0.1);
+  --shadow-premium: 0 30px 60px rgba(0, 0, 0, 0.12);
 }
 
 :root {

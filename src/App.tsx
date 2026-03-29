@@ -34,16 +34,16 @@ import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 // === CONFIGURAÇÕES DO CLIENTE (Mude aqui) ===
 const CLINIC_CONFIG = {
   name: "Bianca Rossi",
-  cro: "Visagista & Hair Stylist",
-  responsibility: "Diretora Criativa",
-  specialty: "Estética Capilar & Visagismo de Luxo",
-  experience: "15+ anos de transformações",
+  cro: "Hair Specialist & Designer",
+  responsibility: "Diretora Artística",
+  specialty: "High-End Beauty & Visagisme",
+  experience: "15+ anos de excelência mundial",
   whatsapp: "5511992876219",
-  whatsappMsg: "Olá! Gostaria de agendar uma consultoria de beleza no Salão.",
-  city: "São Paulo, SP",
-  address: "Av. Europa, 1200 - Jardins",
-  hours: "Ter - Sáb: 09h às 20h",
-  logo: "BIANCA ROSSI",
+  whatsappMsg: "Olá! Desejo agendar uma consultoria exclusiva na DUNO.",
+  city: "Jardins, São Paulo",
+  address: "Alameda Lorena, 1500 - Jardins",
+  hours: "Terça a Sábado: 09h às 21h",
+  logo: "DUNO",
 };
 
 // --- Componentes Auxiliares ---
@@ -57,7 +57,7 @@ const SectionTitle = ({ title, subtitle, centered = true, light = false }: { tit
       className={`flex items-center gap-4 mb-6 ${centered ? 'justify-center' : ''}`}
     >
       <div className={`h-[2px] w-8 ${light ? 'bg-white/30' : 'bg-accent'}`}></div>
-      <span className={`${light ? 'text-white/60' : 'text-accent'} font-bold uppercase tracking-[0.4em] text-[10px]`}>{CLINIC_CONFIG.logo} ESTÉTICA</span>
+      <span className={`${light ? 'text-white/60' : 'text-accent'} font-bold uppercase tracking-[0.4em] text-[10px]`}>{CLINIC_CONFIG.logo} LUXE SALON</span>
       <div className={`h-[2px] w-8 ${light ? 'bg-white/30' : 'bg-accent'}`}></div>
     </motion.div>
     <motion.h2 
@@ -113,7 +113,7 @@ const Navbar = () => {
           <span className={`text-3xl font-display font-bold tracking-[0.3em] uppercase ${isScrolled ? 'text-primary' : 'text-primary'}`}>
             {CLINIC_CONFIG.logo}
           </span>
-          <span className="w-2 h-2 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+          <span className="w-2 h-2 bg-accent rounded-full opacity-100 transition-opacity"></span>
         </a>
 
         {/* Desktop Menu */}
@@ -130,9 +130,9 @@ const Navbar = () => {
           ))}
           <a 
             href={`https://wa.me/${CLINIC_CONFIG.whatsapp}?text=${encodeURIComponent(CLINIC_CONFIG.whatsappMsg)}`}
-            className="bg-primary text-white px-8 py-3 rounded-full text-[10px] font-bold tracking-[0.2em] hover:bg-accent transition-all shadow-xl"
+            className="bg-primary text-white px-10 py-4 rounded-full text-[10px] font-bold tracking-[0.2em] hover:bg-accent transition-all shadow-[0_10px_30px_rgba(0,0,0,0.2)]"
           >
-            AGENDAR
+            CONCIERGE
           </a>
         </div>
 
@@ -179,7 +179,7 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-bg-soft">
+    <section id="home" className="relative min-h-[110vh] flex items-center pt-32 md:pt-40 overflow-hidden bg-bg-light">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 -skew-x-12 translate-x-1/4 z-0"></div>
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-accent/5 rounded-full blur-[120px] z-0"></div>
@@ -201,14 +201,13 @@ const Hero = () => {
               <span className="text-accent font-accent font-bold uppercase tracking-[0.4em] text-[10px]">BELEZA E VISAGISMO DE LUXO</span>
             </motion.div>
             
-            <h1 className="text-5xl md:text-8xl font-display text-primary leading-[1] md:leading-[0.9] mb-10">
-              O Visual <br />
-              que Define sua <br />
-              <span className="italic text-accent">Essência.</span>
+            <h1 className="text-6xl md:text-9xl font-display text-primary leading-[1] md:leading-[0.85] mb-12 tracking-tight">
+              A Arte do <br />
+              Novo <span className="italic font-normal">Chic.</span>
             </h1>
             
             <p className="text-xl text-text-muted font-light leading-relaxed max-w-lg mb-12">
-              Na <span className="font-bold text-primary">{CLINIC_CONFIG.logo}</span>, elevamos sua auto-estima com protocolos de visagismo exclusivos e as técnicas mais sofisticadas do mercado.
+              Na <span className="font-bold text-primary">{CLINIC_CONFIG.logo}</span>, combinamos a precisão do design com a fluidez da arte para revelar sua versão mais sofisticada.
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
               <motion.a 
@@ -243,14 +242,14 @@ const Hero = () => {
             transition={{ duration: 1.2, ease: "easeOut" }}
             className="relative mt-20 lg:mt-0"
           >
-            <div className="aspect-[4/5] rounded-[60px] overflow-hidden shadow-premium relative z-10">
+            <div className="aspect-[4/5] rounded-[80px] overflow-hidden shadow-2xl relative z-10 scale-105">
               <img 
                 src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=2070" 
-                alt="Bianca Rossi Estética" 
+                alt="DUNO LUXE" 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent"></div>
             </div>
             
             {/* Floating Elements */}
@@ -335,8 +334,8 @@ const Philosophy = () => (
           <div className="relative">
             <div className="aspect-[4/5] rounded-[60px] overflow-hidden shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&q=80&w=1000" 
-                alt={`Filosofia ${CLINIC_CONFIG.logo}`} 
+                src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&q=80&w=1000" 
+                alt={`Luxe at ${CLINIC_CONFIG.logo}`} 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
@@ -361,16 +360,15 @@ const Philosophy = () => (
         >
           <span className="text-accent font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">Nossa Filosofia</span>
           <h2 className="text-5xl md:text-6xl font-display text-primary mb-10 leading-[1.1]">
-            Acreditamos que seu <br />
-            <span className="italic">Visual</span> <br />
-            é sua melhor assinatura.
+            Visagismo sob a <br />
+            <span className="italic serif">Luz do Design.</span>
           </h2>
           <div className="space-y-8 text-text-muted font-light leading-relaxed text-lg">
             <p>
-              Na {CLINIC_CONFIG.logo}, não buscamos apenas mudar aparências, mas sim revelar a beleza autêntica que já existe em você. Através do visagismo, harmonizamos suas características com seu estilo de vida.
+              Na {CLINIC_CONFIG.logo}, transcendemos o conceito tradicional de salão. Aplicamos a matemática das proporções áureas para desenhar um visual que não apenas embeleza, mas comunica autoridade e elegância.
             </p>
             <p>
-              Cada detalhe, do corte à paleta de cores, é planejado para realçar sua melhor versão, unindo o bom gosto clássico às tendências mais modernas do cenário global.
+              Sua beleza é tratada como uma obra em construção, onde cada traço e cada tom são meticulosamente escolhidos para ressoar com sua identidade interna.
             </p>
           </div>
           
@@ -480,52 +478,100 @@ const About = () => (
 const Services = () => {
   const services = [
     { 
-      title: "Corte Visagista", 
-      desc: "Um corte projetado para harmonizar com seus traços faciais e expressar sua personalidade única.", 
+      title: "Arquitetura de Corte", 
+      desc: "Escultura capilar baseada em visagismo europeu para harmonização facial absoluta.", 
       image: "https://images.unsplash.com/photo-1560869713-7d0a29430863?auto=format&fit=crop&q=80&w=800",
       icon: <Sparkles />,
-      tag: "ESTILO",
+      tag: "SIGNATURE",
       size: "large"
     },
     { 
-      title: "Coloração Luxe", 
-      desc: "Técnicas de mechas e coloração que preservam a saúde dos fios com brilho tridimensional.", 
+      title: "Coloração Couture", 
+      desc: "Paletas personalizadas criadas para iluminar seu tom de pele com pigmentos orgânicos.", 
       image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=800",
       icon: <Zap />,
-      tag: "COR",
+      tag: "COLOR",
       size: "small"
     },
     { 
-      title: "Terapia Capilar", 
-      desc: "Tratamentos profundos para restauração da fibra e saúde do couro cabeludo.", 
+      title: "Mega Hair Invisible", 
+      desc: "Extensões de fita invisível com cabelo humano premium para volume e comprimento naturais.", 
+      image: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&q=80&w=800",
+      icon: <Plus />,
+      tag: "VOLUME",
+      size: "small"
+    },
+    { 
+      title: "Cronograma de Elite", 
+      desc: "Tratamento de 4 etapas para recuperação total da massa e brilho espelhado.", 
       image: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&q=80&w=800",
       icon: <ShieldCheck />,
-      tag: "SAÚDE",
+      tag: "THERAPY",
       size: "small"
     },
     { 
       title: "Makeup Editorial", 
-      desc: "Maquiagens sofisticadas para eventos, casamentos e sessões de fotos profissionais.", 
+      desc: "Técnicas de tapete vermelho para festas, galas e produções fotográficas.", 
       image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&q=80&w=800",
       icon: <Star />,
-      tag: "MAKEUP",
+      tag: "STYLE",
       size: "small"
     },
     { 
-      title: "Unhas em Gel", 
-      desc: "Alongamento e esmaltação premium com acabamento impecável e alta durabilidade.", 
+      title: "Spa de Mãos & Pés", 
+      desc: "Experiência sensorial completa com esmaltação francesa e hidratação profunda.", 
       image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=800",
       icon: <Sparkles />,
-      tag: "ESTÉTICA",
+      tag: "BEAUTY",
       size: "small"
     },
     { 
-      title: "Spa Facial", 
-      desc: "Protocolos de limpeza e hidratação para uma pele radiante e descansada.", 
-      image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800",
-      icon: <CheckCircle2 />,
-      tag: "RELAX",
+      title: "Bridal Luxury Suite", 
+      desc: "Dia exclusivo para noivas em suíte privada com equipe dedicada de visagistas.", 
+      image: "https://images.unsplash.com/photo-1527359143442-3ee33f7c320d?auto=format&fit=crop&q=80&w=800",
+      icon: <Award />,
+      tag: "EXCLUSIVE",
       size: "large"
+    },
+    { 
+      title: "Grooming Lounge", 
+      desc: "Corte e barba clássica com toalha quente em ambiente privativo masculino.", 
+      image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=800",
+      icon: <Minus />,
+      tag: "GENTLEMAN",
+      size: "small"
+    },
+    { 
+      title: "Scalp Detox", 
+      desc: "Limpeza profunda do couro cabeludo com micro-esfoliação e infusão de ozônio.", 
+      image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800",
+      icon: <Zap />,
+      tag: "HEALTH",
+      size: "small"
+    },
+    { 
+      title: "Color Correction", 
+      desc: "Especialistas em reverter danos e tons indesejados com preservação da fibra.", 
+      image: "https://images.unsplash.com/photo-1560869713-7d0a29430863?auto=format&fit=crop&q=80&w=800",
+      icon: <ChevronRight />,
+      tag: "EXPERT",
+      size: "small"
+    },
+    { 
+      title: "Elite Brow Design", 
+      desc: "Arquitetura de sobrancelhas com técnica de fio a fio e visagismo.", 
+      image: "https://images.unsplash.com/photo-1522337443140-52f20c810756?auto=format&fit=crop&q=80&w=800",
+      icon: <Star />,
+      tag: "ESTHETICS",
+      size: "small"
+    },
+    { 
+      title: "Penteados de Gala", 
+      desc: "Coques e tranças artísticas para eventos que exigem o máximo de sofisticação.", 
+      image: "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&q=80&w=800",
+      icon: <Sparkles />,
+      tag: "ART",
+      size: "small"
     }
   ];
 
@@ -907,8 +953,8 @@ const ContactSection = () => (
         
         <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10">
           <div>
-            <span className="text-accent font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">CONTATO</span>
-            <h2 className="text-5xl md:text-6xl font-display text-primary mb-10">Agende sua <br /><span className="italic">Experiência</span></h2>
+            <span className="text-accent font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">EXPERIÊNCIA DUNO</span>
+            <h2 className="text-5xl md:text-6xl font-display text-primary mb-10">Reserve seu <br /><span className="italic">Momento.</span></h2>
             
             <div className="space-y-8">
               <div className="flex items-center gap-6">
@@ -945,17 +991,17 @@ const ContactSection = () => (
             
             <a 
               href={`https://wa.me/${CLINIC_CONFIG.whatsapp}?text=${encodeURIComponent(CLINIC_CONFIG.whatsappMsg)}`}
-              className="mt-12 inline-flex items-center gap-4 bg-primary text-white px-12 py-6 rounded-full font-bold text-[10px] tracking-[0.2em] hover:bg-accent transition-all shadow-2xl"
+              className="mt-12 inline-flex items-center gap-4 bg-primary text-white px-12 py-6 rounded-full font-bold text-[10px] tracking-[0.2em] hover:bg-accent transition-all shadow-premium"
             >
-              FALAR COM UM ESPECIALISTA <ArrowRight size={14} />
+              FALAR COM NOSSO CONCIERGE <ArrowRight size={14} />
             </a>
           </div>
           
           <div className="relative">
             <div className="aspect-square rounded-[60px] overflow-hidden shadow-2xl border-8 border-white">
               <img 
-                src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=1000" 
-                alt={`Clínica ${CLINIC_CONFIG.logo}`} 
+                src="https://images.unsplash.com/photo-1522338140262-f46f5913618a?auto=format&fit=crop&q=80&w=1000" 
+                alt={`Luxe Experience at ${CLINIC_CONFIG.logo}`} 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
@@ -998,33 +1044,67 @@ const MapSection = () => (
   </section>
 );
 
-const ClinicExperience = () => (
+const TeamSection = () => (
+  <section className="py-32 bg-bg-light">
+    <div className="max-w-7xl mx-auto px-6">
+      <SectionTitle 
+        title="Os Maestros" 
+        subtitle="Uma curadoria dos melhores talentos internacionais, unidos pela paixão pela estética de alto padrão."
+      />
+      <div className="grid md:grid-cols-3 gap-12">
+        {[
+          { name: "Bianca Rossi", role: "Creative Director & Hair Artist", image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=800" },
+          { name: "Julian Vance", role: "Master Colorist", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800" },
+          { name: "Sophia Arès", role: "Editorial Makeup Artist", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=800" }
+        ].map((member, i) => (
+          <motion.div 
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.2 }}
+            className="group"
+          >
+            <div className="aspect-[3/4] rounded-[40px] overflow-hidden mb-6 relative shadow-2xl">
+              <img src={member.image} alt={member.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            <h4 className="text-2xl font-display text-primary mb-1">{member.name}</h4>
+            <p className="text-[10px] text-accent font-bold uppercase tracking-widest">{member.role}</p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const ExperienceGallery = () => (
   <section className="py-24 bg-white overflow-hidden">
     <div className="max-w-7xl mx-auto px-6">
       <SectionTitle 
-        title="Nossa Estrutura" 
-        subtitle="Ambientes projetados para unir tecnologia digital ao máximo conforto e biossegurança."
+        title="O Manifesto Visual" 
+        subtitle="Explore a atmosfera de sofisticação e os detalhes que tornam cada visita à DUNO uma experiência única."
       />
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:auto-rows-[250px]">
-        <div className="md:col-span-2 md:row-span-2 h-[400px] md:h-full rounded-[40px] md:rounded-[60px] overflow-hidden shadow-2xl relative group">
-          <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Consultório Moderno" />
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:auto-rows-[300px]">
+        <div className="md:col-span-2 md:row-span-2 h-[400px] md:h-full rounded-[60px] overflow-hidden shadow-2xl relative group">
+          <img src="https://images.unsplash.com/photo-1522338140262-f46f5913618a?auto=format&fit=crop&q=80&w=1200" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Luxe Interior" />
           <div className="absolute inset-0 bg-primary/20"></div>
-          <div className="absolute bottom-10 left-10 text-white">
-            <p className="text-[10px] uppercase tracking-widest font-bold mb-2">Tecnologia</p>
-            <h4 className="text-2xl md:text-3xl font-display">Fluxo 100% Digital</h4>
+          <div className="absolute bottom-12 left-12 text-white">
+            <p className="text-[10px] uppercase tracking-widest font-bold mb-2">Atelier</p>
+            <h4 className="text-3xl font-display italic">Design & Conforto</h4>
           </div>
         </div>
-        <div className="h-[250px] md:h-full rounded-[40px] overflow-hidden shadow-xl group">
-          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Equipamentos" />
+        <div className="h-[300px] md:h-full rounded-[40px] overflow-hidden shadow-xl group">
+          <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Service" />
         </div>
-        <div className="h-[250px] md:h-full rounded-[40px] overflow-hidden shadow-xl group">
-          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Biossegurança" />
+        <div className="h-[300px] md:h-full rounded-[40px] overflow-hidden shadow-xl group">
+          <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Vibe" />
         </div>
-        <div className="md:col-span-2 h-[300px] md:h-full rounded-[40px] md:rounded-[50px] overflow-hidden shadow-xl group relative">
-          <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Sala de Espera" />
+        <div className="md:col-span-2 h-[300px] md:h-full rounded-[50px] overflow-hidden shadow-xl group relative">
+          <img src="https://images.unsplash.com/photo-1522337443140-52f20c810756?auto=format&fit=crop&q=80&w=1200" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Lifestyle" />
           <div className="absolute inset-0 bg-primary/10"></div>
           <div className="absolute bottom-8 right-8 text-white text-right">
-            <p className="text-xl md:text-2xl font-display">Conforto & Bem-Estar</p>
+            <p className="text-2xl font-display">Sinfonia das Cores</p>
           </div>
         </div>
       </div>
@@ -1096,7 +1176,8 @@ export default function App() {
       <Philosophy />
       <About />
       <Services />
-      <ClinicExperience />
+      <ExperienceGallery />
+      <TeamSection />
       <Portfolio />
       <VirtualAssessment />
       <Testimonials />
