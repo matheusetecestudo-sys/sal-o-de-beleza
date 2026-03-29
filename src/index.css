@@ -1,26 +1,45 @@
+/**
+ * === PERSONALIZAÇÃO RÁPIDA DO CLIENTE ===
+ * 
+ * Instruções: Altere os valores abaixo para mudar a identidade visual do site instantaneamente.
+ * 
+ * --primary-color:   Cor principal (Laranja Energético) - Usada em botões e destaques.
+ * --secondary-color: Cor secundária (Amarelo Suave) - Usada em detalhes e gradientes.
+ * --accent-color:    Cor de destaque (Verde Menta) - Usada para transmitir frescor.
+ * --bg-color:        Cor de fundo principal (Branco Puro).
+ * --bg-soft:         Cor de fundo suave (Cinza Claro) - Usada em seções alternadas.
+ * --text-main:       Cor do texto principal (Grafite Escuro).
+ * --text-muted:      Cor do texto secundário (Cinza Médio).
+ * --radius:          Arredondamento dos cantos (0.5rem = 8px).
+ */
+
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap');
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Playfair Display", serif;
-  --font-accent: "Space Grotesk", sans-serif;
-  
-  /* === LUXURY GLOBAL DESIGN SYSTEM (OBSIDIAN & VINTAGE GOLD) === */
-  --color-primary: #1A1A1A;      /* Obsidian Black */
-  --color-accent: #C5A059;       /* Vintage Gold */
-  --color-accent-light: #E0D5B8; /* Pale Gold */
-  --color-bg-light: #FDFBF7;     /* Alabaster Silk */
-  --color-bg-soft: #F5F2ED;      /* Warm Stone */
-  --color-text-main: #2D2D2D;    /* Graphite Detail */
-  --color-text-muted: #7A7A7A;   /* Slate Gray */
-  --color-whatsapp: #25D366;
-  
-  --shadow-premium: 0 30px 60px rgba(0, 0, 0, 0.12);
+  --font-display: "Poppins", sans-serif;
+
+  /* MAPEAMENTO DE VARIÁVEIS CSS PARA O TAILWIND */
+  --color-primary: var(--primary-color);
+  --color-secondary: var(--secondary-color);
+  --color-accent: var(--accent-color);
+  --color-bg-light: var(--bg-color);
+  --color-bg-soft: var(--bg-soft);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
 }
 
 :root {
-  --radius: 0.5rem;
+  /* PALETA POPULAR ALEGRE (VALORES PADRÃO) */
+  --primary-color: #FF6B00;    /* Laranja Vibrante */
+  --secondary-color: #FFC107;  /* Amarelo Solar */
+  --accent-color: #00C4B4;     /* Verde Menta Fresco */
+  --bg-color: #FFFFFF;         /* Branco Puro */
+  --bg-soft: #F8F9FA;          /* Cinza muito claro */
+  --text-main: #2D2D2D;        /* Grafite Moderno */
+  --text-muted: #6C757D;       /* Cinza Muted */
+  --radius: 1rem;              /* Arredondamento amigável */
 }
 
 @layer base {
@@ -32,66 +51,60 @@
     @apply font-sans text-text-main bg-bg-light antialiased;
   }
   
-  h1, h2, h3, .font-display {
-    @apply font-display;
+  h1, h2, h3, h4, .font-display {
+    @apply font-display font-bold;
   }
 
-  /* Custom Scrollbar */
+  /* Custom Scrollbar Alegre */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 10px;
   }
   ::-webkit-scrollbar-track {
     @apply bg-bg-soft;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-accent/20 rounded-full hover:bg-accent/40 transition-colors;
+    @apply bg-primary/30 rounded-full border-2 border-bg-soft hover:bg-primary/50 transition-colors;
   }
+}
+
+/* UTILITÁRIOS CUSTOMIZADOS */
+
+.glass-card {
+  @apply bg-white/90 backdrop-blur-md border border-white/20 shadow-xl;
+}
+
+.bg-gradient-popular {
+  @apply bg-gradient-to-br from-primary to-secondary;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+}
+
+.btn-whatsapp {
+  @apply bg-[#25D366] text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95 shadow-lg hover:shadow-[#25D366]/30;
+}
+
+.btn-primary {
+  @apply bg-primary text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-lg shadow-primary/20 hover:bg-primary/90;
 }
 
 /* Animação de Pulso para o WhatsApp */
 @keyframes pulse-whatsapp {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-  70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
   100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
 
-.animate-pulse-whatsapp {
+.animate-whatsapp {
   animation: pulse-whatsapp 2s infinite;
 }
 
-/* Animação de Marquee para a Galeria */
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 40s linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
-
-/* Estilos Customizados */
-.glass-card {
-  @apply bg-white/80 backdrop-blur-xl border border-white/20 shadow-premium;
-}
-
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary;
-}
-
-.btn-primary {
-  @apply bg-primary text-white px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 active:scale-95 shadow-lg;
-}
-
+/* Utilitários de Seção */
 .section-padding {
   @apply py-20 px-6 max-w-7xl mx-auto;
 }
 
-.card-premium {
-  @apply bg-white p-8 rounded-2xl shadow-[var(--shadow-premium)] border border-slate-100 transition-all hover:-translate-y-1;
+.card-service {
+  @apply bg-white p-6 rounded-[var(--radius)] shadow-md border border-gray-100 hover:border-primary/20 hover:shadow-xl transition-all hover:-translate-y-1;
 }
