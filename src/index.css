@@ -1,24 +1,15 @@
 /**
- * === PERSONALIZAÇÃO RÁPIDA DO CLIENTE ===
- * 
- * Instruções: Altere os valores abaixo para mudar a identidade visual do site instantaneamente.
- * 
- * --primary-color:   Cor principal (Laranja Energético) - Usada em botões e destaques.
- * --secondary-color: Cor secundária (Amarelo Suave) - Usada em detalhes e gradientes.
- * --accent-color:    Cor de destaque (Verde Menta) - Usada para transmitir frescor.
- * --bg-color:        Cor de fundo principal (Branco Puro).
- * --bg-soft:         Cor de fundo suave (Cinza Claro) - Usada em seções alternadas.
- * --text-main:       Cor do texto principal (Grafite Escuro).
- * --text-muted:      Cor do texto secundário (Cinza Médio).
- * --radius:          Arredondamento dos cantos (0.5rem = 8px).
+ * === DUNO PREMIUM POPULAR - GLOBAL DESIGN SYSTEM ===
+ * Estilo: Minimalismo Sofisticado com Paleta Energética (Laranja & Obsidian)
+ * Tipografia: Playfair Display (Títulos) + Inter (Corpo)
  */
 
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Poppins", sans-serif;
+  --font-display: "Playfair Display", serif;
 
   /* MAPEAMENTO DE VARIÁVEIS CSS PARA O TAILWIND */
   --color-primary: var(--primary-color);
@@ -31,15 +22,15 @@
 }
 
 :root {
-  /* PALETA POPULAR ALEGRE (VALORES PADRÃO) */
-  --primary-color: #FF6B00;    /* Laranja Vibrante */
-  --secondary-color: #FFC107;  /* Amarelo Solar */
-  --accent-color: #00C4B4;     /* Verde Menta Fresco */
+  /* PALETA PREMIUM ACESSÍVEL */
+  --primary-color: #FF6B00;    /* Laranja Energético Premium */
+  --secondary-color: #1A1A1A;  /* Preto Profundo Obsidian */
+  --accent-color: #FFC107;     /* Amarelo Dourado Suave */
   --bg-color: #FFFFFF;         /* Branco Puro */
-  --bg-soft: #F8F9FA;          /* Cinza muito claro */
-  --text-main: #2D2D2D;        /* Grafite Moderno */
-  --text-muted: #6C757D;       /* Cinza Muted */
-  --radius: 1rem;              /* Arredondamento amigável */
+  --bg-soft: #F9F8F6;          /* Off-White Creme */
+  --text-main: #1A1A1A;        /* Preto Obsidian */
+  --text-muted: #666666;       /* Cinza Sofisticado */
+  --radius: 0rem;              /* Design Moderno: Cantos Retos/Afiados ou mínimos */
 }
 
 @layer base {
@@ -48,63 +39,68 @@
   }
   
   body {
-    @apply font-sans text-text-main bg-bg-light antialiased;
+    @apply font-sans text-text-main bg-bg-light antialiased overflow-x-hidden;
   }
   
   h1, h2, h3, h4, .font-display {
     @apply font-display font-bold;
   }
 
-  /* Custom Scrollbar Alegre */
+  /* Custom Scrollbar Premium */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
   }
   ::-webkit-scrollbar-track {
     @apply bg-bg-soft;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-primary/30 rounded-full border-2 border-bg-soft hover:bg-primary/50 transition-colors;
+    @apply bg-primary hover:bg-primary/80 transition-colors;
   }
 }
 
-/* UTILITÁRIOS CUSTOMIZADOS */
+/* UI ELEMENTS */
 
-.glass-card {
-  @apply bg-white/90 backdrop-blur-md border border-white/20 shadow-xl;
+.section-container {
+  @apply max-w-7xl mx-auto px-6 py-32;
 }
 
-.bg-gradient-popular {
-  @apply bg-gradient-to-br from-primary to-secondary;
+.text-justify-custom {
+  text-align: justify;
+  text-justify: inter-word;
 }
 
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+.premium-btn {
+  @apply relative overflow-hidden px-10 py-5 font-bold text-[10px] tracking-[0.3em] uppercase transition-all duration-500 border;
 }
 
-.btn-whatsapp {
-  @apply bg-[#25D366] text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95 shadow-lg hover:shadow-[#25D366]/30;
+.btn-primary-luxe {
+  @apply bg-primary border-primary text-white hover:bg-transparent hover:text-primary;
 }
 
-.btn-primary {
-  @apply bg-primary text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-lg shadow-primary/20 hover:bg-primary/90;
+.btn-outline-luxe {
+  @apply border-secondary text-secondary hover:bg-secondary hover:text-white;
 }
 
-/* Animação de Pulso para o WhatsApp */
-@keyframes pulse-whatsapp {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
-  70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+.card-luxe {
+  @apply relative overflow-hidden bg-white transition-all duration-700 hover:shadow-2xl border border-transparent hover:border-gray-100;
 }
 
-.animate-whatsapp {
-  animation: pulse-whatsapp 2s infinite;
+/* Animação de Pulso Discreta */
+@keyframes pulse-soft {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
 }
 
-/* Utilitários de Seção */
-.section-padding {
-  @apply py-20 px-6 max-w-7xl mx-auto;
+.animate-pulse-soft {
+  animation: pulse-soft 3s infinite ease-in-out;
 }
 
-.card-service {
-  @apply bg-white p-6 rounded-[var(--radius)] shadow-md border border-gray-100 hover:border-primary/20 hover:shadow-xl transition-all hover:-translate-y-1;
+/* Reveal Animation Utilities */
+.reveal-up {
+  @apply opacity-0 translate-y-10 transition-all duration-1000 ease-out;
+}
+
+.revealed {
+  @apply opacity-100 translate-y-0 text-orange-600;
 }
